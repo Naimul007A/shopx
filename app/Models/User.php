@@ -22,7 +22,7 @@ class User extends Authenticatable {
         'password',
         'phone',
         'password',
-        'password',
+
     ];
 
     /**
