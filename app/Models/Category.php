@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
-class category extends Model {
+class Category extends Model {
     use HasFactory, SoftDeletes;
     protected $fillable = [
         'name',
