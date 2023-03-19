@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get( '/', [HomeController::class, 'showHome'] );
+Route::get( '/', [HomeController::class, 'showHome'] )->name( "Frontend.home" );
+
+Route::name( 'Frontend.' )->controller( ProductController::class )->group( function () {
+    Route::get( '/cart', 'showCart' )->name( 'ShowCart' );
+    Route::post( '/cart', 'addToCart' )->name( 'addToCart' );
+} );
