@@ -36,7 +36,14 @@
 
                                         </form>
                                     </div>
-                                    <small class="text-muted">BDT {{ $product->price }}</small>
+                                    <small class="text-muted">
+                                        @if ($product->sale_price !== null)
+                                            <span><strike>BDT.{{ $product->price }}</strike></span>
+                                            <span>BDT. {{ $product->sale_price }}</span>
+                                        @else
+                                            BDT. {{ $product->price }}
+                                        @endif
+                                    </small>
                                 </div>
                             </div>
                         </div>

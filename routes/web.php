@@ -20,4 +20,5 @@ Route::get( '/', [HomeController::class, 'showHome'] )->name( "Frontend.home" );
 Route::name( 'Frontend.' )->controller( ProductController::class )->group( function () {
     Route::get( '/cart', 'showCart' )->name( 'ShowCart' );
     Route::post( '/cart', 'addToCart' )->name( 'addToCart' );
+    Route::post( '/removeCart/{id}', 'cartRemove' )->name( 'CartRemove' );
 } );

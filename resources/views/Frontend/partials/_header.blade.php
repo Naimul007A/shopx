@@ -24,7 +24,7 @@
                             <li><a href="#" class="text-white">Profile</a></li>
                             <li><a href="#" class="text-white">Logout</a></li>
                         @endauth
-                        <li><a href="#" class="text-white">Cart</a></li>
+                        <li><a href="{{ route('Frontend.ShowCart') }}/" class="text-white">Cart</a></li>
                     </ul>
                 </div>
             </div>

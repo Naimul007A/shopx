@@ -11,7 +11,18 @@ use Illuminate\Support\Facades\Validator;
 class ProductController extends Controller {
     //Show cart function
     public function showCart() {
-        dd( session()->all() );
+        // session()->flush();
+        $data = [];
+        if ( session()->has( 'cart' ) ) {
+            $data['total'] = 0;
+            $data['cart']  = session()->get( 'cart' );
+            $data['total'] = array_sum( array_column( $data['cart'], 'sub_total' ) );
+        } else {
+            $data['cart'] = null;
+        }
+
+        return view( 'Frontend.cart', $data );
+
     }
 
     // add to cart function
@@ -29,13 +40,16 @@ class ProductController extends Controller {
 
             if ( array_key_exists( $product->id, $cart ) ) {
 
-                $cart[$product->id]['quantity']++;
+                $quantity                        = $cart[$product->id]['quantity']++;
+                $cart[$product->id]['sub_total'] = (  ( $quantity + 1 ) * $cart[$product->id]['price'] );
 
             } else {
                 $cart[$product->id] = [
-                    'title'    => $product->title,
-                    'quantity' => 1,
-                    'price'    => ( $product->sale_price !== null ) ? $product->sale_price : $product->price,
+                    'product_id' => $product->id,
+                    'title'      => $product->title,
+                    'quantity'   => 1,
+                    'sub_total'  => ( $product->sale_price !== null ) ? $product->sale_price : $product->price,
+                    'price'      => ( $product->sale_price !== null ) ? $product->sale_price : $product->price,
                 ];
             }
 
@@ -44,5 +58,11 @@ class ProductController extends Controller {
             return Redirect()->route( 'Frontend.addToCart' );
 
         }
+    }
+    // cart remove
+    public function cartRemove( $id ) {
+        session()->forget( 'cart.' . $id );
+        return true;
+
     }
 }

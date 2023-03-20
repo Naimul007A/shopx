@@ -5309,6 +5309,7 @@ module.exports = {
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 /***/ }),
 
@@ -5325,10 +5326,9 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
-
+// window.jQuery = require("jquery");
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.bootstrap = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
-window.jquery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 window.popperjs = __webpack_require__(/*! @popperjs/core */ "./node_modules/@popperjs/core/lib/index.js");
 window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
@@ -5357,7 +5357,24 @@ window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
   \********************************/
 /***/ (() => {
 
-
+$(document).ready(function () {
+  $.ajaxSetup({
+    headers: {
+      "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+    }
+  });
+  $(document).on("click", "#Removetocart", function (e) {
+    var id = $(this).data("id");
+    $.ajax({
+      type: "POST",
+      url: "/removeCart/" + id,
+      success: function success(data) {
+        console.log(data);
+        location.reload();
+      }
+    });
+  });
+});
 
 /***/ }),
 

@@ -5,10 +5,9 @@ window._ = require("lodash");
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
-
+// window.jQuery = require("jquery");
 window.axios = require("axios");
 window.bootstrap = require("bootstrap");
-window.jquery = require("jquery");
 window.popperjs = require("@popperjs/core");
 
 window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
