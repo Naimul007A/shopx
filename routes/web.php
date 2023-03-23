@@ -18,7 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::get( '/', [HomeController::class, 'showHome'] )->name( "Frontend.home" );
 
 Route::name( 'Frontend.' )->controller( ProductController::class )->group( function () {
+    Route::get( '/product-details/{slug}', 'showProduct' )->name( 'ShowProduct' );
     Route::get( '/cart', 'showCart' )->name( 'ShowCart' );
     Route::post( '/cart', 'addToCart' )->name( 'addToCart' );
     Route::post( '/removeCart/{id}', 'cartRemove' )->name( 'CartRemove' );
+    Route::post( '/cartdecrease/{id}', 'cartdecrease' )->name( 'Cartdecrease' );
+    Route::post( '/cartincrease/{id}', 'cartincrease' )->name( 'CartIncrease' );
+    Route::get( '/checkout', 'checkout' )->name( 'Checkout' );
 } );

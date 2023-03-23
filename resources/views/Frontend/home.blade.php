@@ -22,11 +22,16 @@
                 @foreach ($Products as $product)
                     <div class="col">
                         <div class="card shadow-sm">
-                            <img src="{{ $product->getFirstMediaUrl('default') }}" alt="{{ $product->title }}">
+                            <a href="{{ route('Frontend.ShowProduct', $product->slug) }}/">
+                                <img class="img-fulid" src="{{ $product->getFirstMediaUrl('default') }}"
+                                    alt="{{ $product->title }}">
+                            </a>
                             <div class="card-body">
-                                <p class="card-text">{{ $product->title }}</p>
+                                <a href="{{ route('Frontend.ShowProduct', $product->slug) }}/">
+                                    <p class="card-text">{{ $product->title }}</p>
+                                </a>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
+                                    <div class="btn-group py-2">
                                         <form action="{{ route('Frontend.addToCart') }}" method="post">
                                             @csrf
                                             <input type="hidden" name="product_id" value="{{ $product->id }}">

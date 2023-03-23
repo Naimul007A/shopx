@@ -65,4 +65,40 @@ class ProductController extends Controller {
         return true;
 
     }
+    ///product details  show
+    public function showProduct( $slug ) {
+        $data            = [];
+        $data['product'] = Product::where( 'slug', $slug )->get();
+        return view( 'Frontend.productDetails', $data );
+    }
+    //cart quantity increase
+    public function cartincrease( $id ) {
+        $cart                   = session()->get( 'cart' );
+        $quantity               = $cart[$id]['quantity']++;
+        $cart[$id]['sub_total'] = (  ( $quantity + 1 ) * $cart[$id]['price'] );
+
+        session( ['cart' => $cart] );
+        return "data changed";
+    }
+    //cart quantity increase
+    public function cartdecrease( $id ) {
+        $cart                   = session()->get( 'cart' );
+        $quantity               = $cart[$id]['quantity']--;
+        $cart[$id]['sub_total'] = (  ( $quantity - 1 ) * $cart[$id]['price'] );
+
+        session( ['cart' => $cart] );
+        return "data changed";
+    }
+    //checkout page
+    public function checkout() {
+        $data = [];
+        if ( session()->has( 'cart' ) ) {
+            $data['total'] = 0;
+            $data['cart']  = session()->get( 'cart' );
+            $data['total'] = array_sum( array_column( $data['cart'], 'sub_total' ) );
+        } else {
+            $data['cart'] = null;
+        }
+        return view( 'Frontend.checkout', $data );
+    }
 }
