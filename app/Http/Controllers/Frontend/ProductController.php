@@ -25,7 +25,6 @@ class ProductController extends Controller {
         return view( 'Frontend.cart', $data );
 
     }
-
     // add to cart function
     public function addToCart( Request $request ) {
         $validetor = Validator::make( $request->all(), [
@@ -81,7 +80,7 @@ class ProductController extends Controller {
         session( ['cart' => $cart] );
         return "data changed";
     }
-    //cart quantity increase
+    //cart quantity decrease
     public function cartdecrease( $id ) {
         $cart                   = session()->get( 'cart' );
         $quantity               = $cart[$id]['quantity']--;
@@ -102,5 +101,9 @@ class ProductController extends Controller {
             $data['cart'] = null;
         }
         return view( 'Frontend.checkout', $data );
+    }
+    //checkout proccess
+    public function checkoutProccess( Request $request ) {
+        dd( $request->all() );
     }
 }

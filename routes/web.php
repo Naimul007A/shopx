@@ -26,6 +26,7 @@ Route::name( 'Frontend.' )->controller( ProductController::class )->group( funct
     Route::post( '/cartdecrease/{id}', 'cartdecrease' )->name( 'Cartdecrease' );
     Route::post( '/cartincrease/{id}', 'cartincrease' )->name( 'CartIncrease' );
     Route::get( '/checkout', 'checkout' )->name( 'Checkout' );
+    Route::post( '/checkout', 'checkoutProccess' )->name( 'checkoutProccess' );
 
 } );
 Route::middleware( 'guest' )->controller( AuthController::class )->group( function () {
@@ -40,5 +41,4 @@ Route::middleware( 'guest' )->controller( AuthController::class )->group( functi
 
 Route::middleware( 'auth' )->name( 'Frontend.' )->group( function () {
     Route::get( '/logout', [AuthController::class, 'logout'] )->name( 'logout' );
-
 } );

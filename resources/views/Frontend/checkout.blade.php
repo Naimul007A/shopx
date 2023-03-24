@@ -1,7 +1,7 @@
 @extends('Frontend.layouts.master')
 @section('main')
     <div class="container">
-        @auth
+        @guest
 
             <div class="py-5">
                 <div class="alert alert-info">
@@ -9,15 +9,13 @@
                 </div>
             </div>
         @else
-            <div class="py-5">
+            <div class="pt-5">
                 <div class="alert alert-info">
-                    {{-- You are Ordering as,{{ auth()->user()->name }} --}}
+                    You are Ordering as,{{ auth()->user()->name }}
                 </div>
             </div>
-        @endauth
-        @guest
-
-
+        @endguest
+        @auth
             <div class="py-5 text-center">
 
                 <h2>Checkout form</h2>
@@ -25,7 +23,7 @@
             </div>
 
             <div class="row g-5">
-                <div class="col-md-5 col-lg-4 order-md-last">
+                <div class="col-md-5  order-md-last">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-primary">Your cart</span>
                         <span class="badge bg-primary rounded-pill">{{ $count }}</span>
@@ -54,9 +52,10 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-md-7 col-lg-8">
+                <div class="col-md-7">
                     <h4 class="mb-3">Billing address</h4>
-                    <form class="needs-validation" novalidate action="" method="POST">
+                    <form class="needs-validation" novalidate action="{{ route('Frontend.checkoutProccess') }}" method="POST">
+                        @csrf
                         <div class="row g-3">
                             <div class="">
                                 <label for="name" class="form-label">Your name</label>
@@ -79,17 +78,8 @@
 
                             <div class="col-12">
                                 <label for="address" class="form-label">Address</label>
-                                <input type="text" class="form-control" id="address" placeholder="1234 Main St">
-
+                                <textarea name="address" id="address" class="form-control" placeholder="1234 Main St"></textarea>
                             </div>
-
-                            <div class="col-12">
-                                <label for="address2" class="form-label">Address 2 <span
-                                        class="text-muted">(Optional)</span></label>
-                                <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
-                            </div>
-
-
                             <div class="col-md-6">
                                 <label for="state" class="form-label">State</label>
                                 <input type="text" name="state" class="form-control" placeholder="Your state ..">
@@ -97,7 +87,8 @@
 
                             <div class="col-md-6">
                                 <label for="zip" class="form-label">Zip</label>
-                                <input type="text" class="form-control" id="zip" placeholder="Your zip code ...">
+                                <input type="text" name="zip_code" class="form-control" id="zip"
+                                    placeholder="Your zip code ...">
                             </div>
                         </div>
                         <hr class="my-4">
@@ -105,6 +96,6 @@
                     </form>
                 </div>
             </div>
-        @endguest
+        @endauth
     </div>
 @endsection

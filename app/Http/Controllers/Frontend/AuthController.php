@@ -85,7 +85,7 @@ class AuthController extends Controller {
         }
 
     }
-///account activation
+    //account activation
     public function accountActivation( $token ) {
         if ( $token !== null ) {
             $user = User::where( 'email_verification_token', $token )->first();
@@ -108,5 +108,7 @@ class AuthController extends Controller {
             return redirect()->route( 'login' );
         }
     }
+
+    //
 
 }
