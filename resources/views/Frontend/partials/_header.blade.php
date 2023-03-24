@@ -17,12 +17,13 @@
                     <h4 class="text-white">Menu</h4>
                     <ul class="list-unstyled">
                         @guest
-                            <li class="list-unstyle"><a href="#" class="text-white">Create an account ?</a></li>
-                            <li><a href="#" class="text-white">Login</a></li>
+                            <li class="list-unstyle"><a href="{{ route('registration') }}/" class="text-white">Create an
+                                    account ?</a></li>
+                            <li><a href="{{ route('login') }}/" class="text-white">Login</a></li>
                         @endguest
                         @auth
                             <li><a href="#" class="text-white">Profile</a></li>
-                            <li><a href="#" class="text-white">Logout</a></li>
+                            <li><a href="{{ route('Frontend.logout') }}" class="text-white">Logout</a></li>
                         @endauth
                         <li><a href="{{ route('Frontend.ShowCart') }}/" class="text-white">Cart</a></li>
                     </ul>

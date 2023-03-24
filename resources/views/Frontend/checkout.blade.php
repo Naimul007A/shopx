@@ -8,6 +8,12 @@
                     You cannot be checkout without login. <a href="">Please login </a>!
                 </div>
             </div>
+        @else
+            <div class="py-5">
+                <div class="alert alert-info">
+                    {{-- You are Ordering as,{{ auth()->user()->name }} --}}
+                </div>
+            </div>
         @endauth
         @guest
 
@@ -22,14 +28,14 @@
                 <div class="col-md-5 col-lg-4 order-md-last">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-primary">Your cart</span>
-                        <span class="badge bg-primary rounded-pill">3</span>
+                        <span class="badge bg-primary rounded-pill">{{ $count }}</span>
                     </h4>
                     <ul class="list-group mb-3">
                         @foreach ($cart as $data)
                             <li class="list-group-item d-flex justify-content-between lh-sm">
                                 <div>
                                     <h6 class="my-0">{{ $data['title'] }}</h6>
-                                    <small class="text-danger">X {{ $data['quantity'] }}</small>
+                                    <small class="text-danger">Quantity: {{ $data['quantity'] }}</small>
                                 </div>
                                 <span class="text-muted">BDT. {{ number_format($data['sub_total'], 2) }}</span>
                             </li>

@@ -17,6 +17,12 @@ class DatabaseSeeder extends Seeder {
         User::factory( 10 )->create();
         Category::factory( 10 )->create();
         Product::factory( 10 )->create();
+        $products = Product::select( 'id' )->get();
+        $url      = 'https://via.placeholder.com/640x480.png/002277?text=voluptate';
+        foreach ( $products as $product ) {
+            $product->addMediaFromUrl( $url )
+                ->toMediaCollection();
+        }
 
     }
 }

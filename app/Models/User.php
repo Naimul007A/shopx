@@ -21,7 +21,10 @@ class User extends Authenticatable {
         'email',
         'password',
         'phone',
-        'password',
+        'email_verification_token',
+        'email_verified',
+        'email_verified_at',
+        'last_login',
 
     ];
 

@@ -17,6 +17,7 @@ class ProductController extends Controller {
             $data['total'] = 0;
             $data['cart']  = session()->get( 'cart' );
             $data['total'] = array_sum( array_column( $data['cart'], 'sub_total' ) );
+
         } else {
             $data['cart'] = null;
         }
@@ -96,6 +97,7 @@ class ProductController extends Controller {
             $data['total'] = 0;
             $data['cart']  = session()->get( 'cart' );
             $data['total'] = array_sum( array_column( $data['cart'], 'sub_total' ) );
+            $data['count'] = count( $data['cart'] );
         } else {
             $data['cart'] = null;
         }

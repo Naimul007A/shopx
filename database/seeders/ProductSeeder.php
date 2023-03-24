@@ -14,12 +14,12 @@ class ProductSeeder extends Seeder {
     public function run() {
         Product::Factory( 20 )->create();
 
-        $products = Product::select( 'id' )->get();
-        $url      = 'https://via.placeholder.com/640x480.png/002277?text=voluptate';
-        foreach ( $products as $product ) {
-            $product->addMediaFromUrl( $url )
-                ->toMediaCollection();
-        }
+        // $products = Product::select( 'id' )->get();
+        // $url      = 'https://via.placeholder.com/640x480.png/002277?text=voluptate';
+        // foreach ( $products as $product ) {
+        //     $product->addMediaFromUrl( $url )
+        //         ->toMediaCollection();
+        // }
     }
 
 }
